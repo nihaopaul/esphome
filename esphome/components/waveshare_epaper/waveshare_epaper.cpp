@@ -192,8 +192,15 @@ void WaveshareEPaperTypeA::initialize() {
   this->data(0x9D);
 
   // COMMAND WRITE VCOM REGISTER
-  this->command(0x2C);
-  this->data(0xA8);
+  switch (this->model_) {
+    case TTGO_EPAPER_2_13_IN_V231:
+      this->command(0x2C);
+      this->data(0x9B);
+      break;
+    default:
+      this->command(0x2C);
+      this->data(0xA8);
+  }
 
   // COMMAND SET DUMMY LINE PERIOD
   this->command(0x3A);
