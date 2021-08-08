@@ -396,8 +396,13 @@ void HOT WaveshareEPaperTypeA::display() {
 
   // COMMAND MASTER ACTIVATION
   this->command(0x20);
+
   // COMMAND TERMINATE FRAME READ WRITE
-  this->command(0xFF);
+  if (this->model_ == TTGO_EPAPER_2_13_IN_V231) {
+    // do nothing
+  } else {
+    this->command(0xFF);
+  }
 
   this->status_clear_warning();
 }
