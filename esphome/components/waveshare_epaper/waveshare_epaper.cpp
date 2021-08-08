@@ -317,6 +317,26 @@ void HOT WaveshareEPaperTypeA::display() {
       this->data(this->get_height_internal() - 1);
       this->data((this->get_height_internal() - 1) >> 8);
       break;
+    case TTGO_EPAPER_2_13_IN_V231:
+      // COMMAND SET RAM X ADDRESS START END POSITION
+      this->command(0x44);
+      this->data(0x01);
+      this->data(0x10);
+      // COMMAND SET RAM Y ADDRESS START END POSITION
+      this->command(0x45);
+      this->data(0x00);
+      this->data((this->get_height_internal() - 1) >> 8);
+      this->data(this->get_height_internal() - 1);
+      this->data(0x00);
+
+      // COMMAND SET RAM X ADDRESS COUNTER
+      this->command(0x4E);
+      this->data(0x01);
+      // COMMAND SET RAM Y ADDRESS COUNTER
+      this->command(0x4F);
+      this->data((this->get_height_internal() - 1) >> 8);
+      this->data((this->get_height_internal() - 1) >> 8);
+      break;
     default:
       // COMMAND SET RAM X ADDRESS START END POSITION
       this->command(0x44);
